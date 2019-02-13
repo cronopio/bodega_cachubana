@@ -10,7 +10,7 @@ prueba para desarrollador frontend de frubana.
 * clonar el repositoio
 
   ``` bash
-  $ git clone https://gitlab.com/alejandro_gnz/frontend-test.git
+  $ git clone https://github.com/Frubana/bodega_cachubana.git
   ```
 * instalar dependencias
   ``` bash
