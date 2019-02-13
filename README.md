@@ -7,7 +7,7 @@ prueba para desarrollador frontend de frubana.
 * yarn o npm
 
 ### iniciar el proyecto
-* clonar el repositoio
+* clonar el repositorio:
 
   ``` bash
   $ git clone https://github.com/Frubana/bodega_cachubana.git
