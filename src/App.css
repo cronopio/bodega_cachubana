@@ -8,7 +8,7 @@
   pointer-events: none;
 }
 
-.App-header {
+.App-container {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -21,6 +21,46 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.navbar {
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.navbar-btn {
+  margin: 0.5em;
+  background-color: gray;
+}
+
+.container-bodega {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container-products {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.item-order {
+  text-align: left;
+  margin: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid white;
+}
+
+.btn {
+  background-color: #5894d0;
+  font-weight: bold;
+  color: white;
+}
+
+.btn:hover {
+  background-color: white;
+  color:  #5894d0;
 }
 
 @keyframes App-logo-spin {
