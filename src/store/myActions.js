@@ -72,3 +72,14 @@ export const toggleFinish = function tooggleFinish(state = [], action){
     }
   }
 }
+
+export const filterRegionReducer = function filterRegionReducer(state = 'All', action){
+  switch (action.type) {
+    case 'FILTER_REGION': {
+      return action.payload.filter;
+    }
+    default: {
+      return state;
+    }
+  }
+}

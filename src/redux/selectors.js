@@ -21,3 +21,8 @@ export const getOrdersByVisibilityFilter = (store, visibilityFilter) => {
       return allOrders;
   }
 };
+
+export const getOrdersByFiltroRegion = (store, filterRegion) => {
+  if (filterRegion === 'All') return getOrders(store)
+  return getOrders(store).filter(order => (order.region_code === filterRegion))
+}

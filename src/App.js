@@ -6,6 +6,7 @@ import './App.css';
 import OrdersList from './orders-list';
 import Bodega from './Bodega';
 import Alistar from './Alistar';
+import Dashboard from './Dashboard';
 
 class App extends Component {
   constructor(props){
@@ -32,6 +33,10 @@ class App extends Component {
         componentToRender = (
           <div className="App-container">
             <p>Interfaz de Gerente</p>
+            <div className="navbar">
+              <button className="App-link navbar-btn" onClick={this.selectGui.bind(this)} value="ninguna">Ir al Inicio</button>
+            </div>
+            <Dashboard />
             <div className="navbar">
               <button className="App-link navbar-btn" onClick={this.selectGui.bind(this)} value="ninguna">Ir al Inicio</button>
             </div>
