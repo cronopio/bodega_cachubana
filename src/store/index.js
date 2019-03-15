@@ -1,8 +1,15 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import logger from 'redux-logger';
 import data from './orders.json';
+import myActions from './myActions'
+
+const myReduceres = {
+  'ADD_PRODUCT': myActions
+}
 
 function orderReducer(state = [], action) {
+  if (myReduceres[action.type]) return myReduceres[action.type](state, action)
+
   switch (action.type) {
     case '@@ORDERS/ADD_ORDER': {
       return [
