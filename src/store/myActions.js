@@ -1,4 +1,4 @@
-function myActions(state = [], action) {
+export const AddProduct = function AddProduct(state = [], action) {
   switch (action.type) {
     case 'ADD_PRODUCT': {
       // Busco la orden filtrandola por ID
@@ -31,10 +31,46 @@ function myActions(state = [], action) {
         }
         return order
       })
-      return newOrders
+      return [...newOrders]
     }
     default: return state;
   }
 }
 
-export default myActions;
+export const filtroVisualReducer = function filtroVisualReducer(state = 'all', action){
+  switch (action.type) {
+    case 'SET_FILTER': {
+      return action.payload.filter;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export const tooggleFinish = function tooggleFinish(state = [], action){
+  switch(action.type) {
+    case 'TOOGLE_FINISH': {
+      console.log('si entra parce')
+      let newOrders = state.map(order => {
+        if (order._id === action.payload.orderId) {
+          let newProducts = order.products.map(product => {
+            if (product._id === action.payload.productId) {
+              console.log('Poniendo', (!product.finished))
+              return Object.assign({}, product, { finished: (!product.finished) })
+            }
+            return product
+          })
+          // Verifico si ya se completaron todos los productos para marcar la orden como completada
+          let checkFinish = newProducts.every(p => p.finished)
+          return Object.assign({}, order, { products: newProducts, finished: checkFinish })
+        }
+        return order
+      })
+      return [...newOrders]
+    }
+    default: {
+      return state;
+    }
+  }
+}

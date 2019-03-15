@@ -56,11 +56,44 @@
   background-color: #5894d0;
   font-weight: bold;
   color: white;
+  margin-left: 0.5em;
 }
 
 .btn:hover {
   background-color: white;
   color:  #5894d0;
+}
+
+.btn-filtro {
+  background-color: #5894d0;
+  font-weight: bold;
+  color: white;
+  margin: 0.5em;
+  padding: 0.3em;
+  border-color: #757575;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.btn-filtro:hover {
+  background-color: white;
+  color:  #5894d0;
+}
+
+.btn-filtro-activo {
+  background-color: white;
+  font-weight: bold;
+  color: #5894d0;
+  margin: 0.5em;
+  padding: 0.3em;
+  border-color: #757575;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.btn-filtro-activo:hover {
+  background-color: #5894d0;
+  color: white;
 }
 
 @keyframes App-logo-spin {

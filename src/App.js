@@ -71,7 +71,7 @@ class App extends Component {
           <div className="App-container">
             <img src={logo} className="App-logo" alt="logo" />
             <p>
-              Bienvenidos a la plataforma de Cachubana. Porfavor elija entre las siguientes opciones de acuerdo a su rol en la empresa.
+              Bienvenidos a la plataforma de Cachubana. Por favor elija entre las siguientes opciones de acuerdo a su rol en la empresa.
             </p>
             <div className="navbar">
               <button className="App-link navbar-btn" onClick={this.selectGui.bind(this)} value="dashboard">Soy Gerente</button>|

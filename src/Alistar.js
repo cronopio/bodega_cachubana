@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getOrderById } from './redux/selectors';
-import { addProduct } from "./redux/actions";
+import { addProduct, toogleFinish } from "./redux/actions";
 
 // Utilizo este componente para la interfaz para alistar productos
+function ToggleFinish(props){
+  function calltoogleFinish(){
+    props.toogleFinish(props.product._id, props.order._id)
+  }
+  return (<button onClick={calltoogleFinish}>Hey</button>);
+}
 
 class Alistar extends Component {
   constructor(props){
@@ -59,11 +65,12 @@ class Alistar extends Component {
               let actionButtons = (
                 <td style={{textAlign:'right'}}></td>
               );
-              if (restante <= 0) {
+              if (restante <= 0 && product.finished) {
                 styleRestante = 'green'
                 restante = 'OK'
               }
-              if (!product.finished) {
+
+              if (restante > 0) {
                 actionButtons = (
                   <td style={{textAlign:'right'}}>
                     <button onClick={this.callAddProduct(1, product._id, this.props.order._id)}>+1</button>
@@ -77,6 +84,9 @@ class Alistar extends Component {
                   <td style={{textAlign:'left'}}>{product.name} ({product.quantity})</td>
                   <td style={{textAlign:'center', color:styleRestante}}>({restante})</td>
                   {actionButtons}
+                  <td>
+                  <ToggleFinish product={product} order={this.props.order} toogleFinish={this.props.toogleFinish}/>
+                  </td>
                 </tr>
               )
             })
@@ -100,6 +110,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addProduct: (quantity, product, order) => {
       dispatch(addProduct(quantity, product, order))
+    },
+    toogleFinish: (productId, orderId) => {
+      dispatch(toogleFinish(productId, orderId))
     }
   }
 }
