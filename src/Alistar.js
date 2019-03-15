@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getOrderById } from './redux/selectors';
-import { addProduct, toogleFinish } from "./redux/actions";
+import { addProduct, toggleFinish } from "./redux/actions";
 
-// Utilizo este componente para la interfaz para alistar productos
+// Utilizo este componente para mostrar el boton para marcar completo o no un producto.
 function ToggleFinish(props){
-  function calltoogleFinish(){
-    props.toogleFinish(props.product._id, props.order._id)
+  const TEXTO_BOTON = (props.actual) ? 'Marcar como Incompleto' : 'Marcar Completo'
+  function calltoggleFinish(){
+    props.toggleFinish(props.product._id, props.order._id)
   }
-  return (<button onClick={calltoogleFinish}>Hey</button>);
+  return (<button className="btn-action" onClick={calltoggleFinish}>{TEXTO_BOTON}</button>);
 }
 
+// Utilizo este componente para la interfaz para alistar productos
 class Alistar extends Component {
   constructor(props){
     super(props);
@@ -27,14 +29,16 @@ class Alistar extends Component {
 
   render(){
     // Saco la sumatoria de todos los productos alistados
-    let alistados = this.props.order.products.map(p => (typeof p.alistado === 'undefined') ? 0 : p.alistado).reduce((accum, initial) => accum+initial, 0)
+    let alistados = this.props.order.products.map(p => {
+      if (p.finished) return p.quantity
+      return (typeof p.alistado === 'undefined') ? 0 : p.alistado;
+    }).reduce((accum, initial) => accum+initial, 0)
     // Saco la sumatoria de todos los productos pedidos
     let necesarios = this.props.order.products.map(p => p.quantity).reduce((accum, initial) => accum+initial, 0)
 
     // Calculo entonces los porcentajes
     let porcentajeCompletado = ((alistados * 100) / necesarios).toFixed(0)
     let porcentajeFaltante = (100 - porcentajeCompletado).toFixed(0)
-    console.log('Quiero contar los alistados', alistados, necesarios)
     return (
       <div className="orden">
         <div><h3>{this.props.order.user.name} <span style={{fontWeight: 'bold'}}>[{this.props.order.region_code}]</span></h3></div>
@@ -70,11 +74,11 @@ class Alistar extends Component {
                 restante = 'OK'
               }
 
-              if (restante > 0) {
+              if (restante > 0 && !product.finished) {
                 actionButtons = (
                   <td style={{textAlign:'right'}}>
-                    <button onClick={this.callAddProduct(1, product._id, this.props.order._id)}>+1</button>
-                    <button onClick={this.callAddProduct(product.quantity, product._id, this.props.order._id)}>Agregar Todos</button>
+                    <button className="btn-action" onClick={this.callAddProduct(1, product._id, this.props.order._id)}>+1</button>
+                    <button className="btn-action" onClick={this.callAddProduct(product.quantity, product._id, this.props.order._id)}>Agregar Todos</button>
                   </td>
                 )
               }
@@ -85,7 +89,7 @@ class Alistar extends Component {
                   <td style={{textAlign:'center', color:styleRestante}}>({restante})</td>
                   {actionButtons}
                   <td>
-                  <ToggleFinish product={product} order={this.props.order} toogleFinish={this.props.toogleFinish}/>
+                  <ToggleFinish product={product} order={this.props.order} toggleFinish={this.props.toggleFinish} actual={product.finished}/>
                   </td>
                 </tr>
               )
@@ -111,8 +115,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     addProduct: (quantity, product, order) => {
       dispatch(addProduct(quantity, product, order))
     },
-    toogleFinish: (productId, orderId) => {
-      dispatch(toogleFinish(productId, orderId))
+    toggleFinish: (productId, orderId) => {
+      dispatch(toggleFinish(productId, orderId))
     }
   }
 }

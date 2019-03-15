@@ -6,7 +6,10 @@ import FiltrosVisuales from './filtroVisual';
 // Este componente renderiza una lista de productos recibidos en props
 function ProductsList(props) {
   // Saco la sumatoria de todos los productos alistados
-  let alistados = props.products.map(p => (typeof p.alistado === 'undefined') ? 0 : p.alistado).reduce((accum, initial) => accum+initial, 0)
+  let alistados = props.products.map(p => {
+    if (p.finished) return p.quantity
+    return (typeof p.alistado === 'undefined') ? 0 : p.alistado;
+  }).reduce((accum, initial) => accum+initial, 0)
   // Saco la sumatoria de todos los productos pedidos
   let necesarios = props.products.map(p => p.quantity).reduce((accum, initial) => accum+initial, 0)
 
@@ -75,11 +78,7 @@ class OrdersListBodega extends Component {
             <div key={order._id} className='item-order'>
               <div>
                 <h3>{order.user.name}  |  <span style={{fontWeight: 'bold'}}>[{order.region_code}]</span> | 
-                {
-                  (!order.finished) ? (
-                    <button className="btn" onClick={this.setAlistarGui.bind(this)} value={order._id}>Alistar Orden</button>
-                  ) : ''
-                }
+                <button className="btn" onClick={this.setAlistarGui.bind(this)} value={order._id}>{(!order.finished) ? 'Alistar Orden' : 'Ver Orden'}</button>
                 </h3>
               </div>
               <div>{order.slot}</div>

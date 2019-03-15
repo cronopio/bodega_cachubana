@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import logger from 'redux-logger';
 import data from './orders.json';
-import { AddProduct, filtroVisualReducer, tooggleFinish } from './myActions'
+import { AddProduct, filtroVisualReducer, toggleFinish } from './myActions'
 
 const myReduceres = {
   'ADD_PRODUCT': AddProduct,
-  'TOGGLE_FINISH': tooggleFinish
+  'TOGGLE_FINISH': toggleFinish
 }
 
 function orderReducer(state = [], action) {

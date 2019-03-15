@@ -48,15 +48,13 @@ export const filtroVisualReducer = function filtroVisualReducer(state = 'all', a
   }
 }
 
-export const tooggleFinish = function tooggleFinish(state = [], action){
+export const toggleFinish = function tooggleFinish(state = [], action){
   switch(action.type) {
-    case 'TOOGLE_FINISH': {
-      console.log('si entra parce')
+    case 'TOGGLE_FINISH': {
       let newOrders = state.map(order => {
         if (order._id === action.payload.orderId) {
           let newProducts = order.products.map(product => {
             if (product._id === action.payload.productId) {
-              console.log('Poniendo', (!product.finished))
               return Object.assign({}, product, { finished: (!product.finished) })
             }
             return product

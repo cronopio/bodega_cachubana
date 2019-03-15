@@ -96,6 +96,16 @@
   color: white;
 }
 
+.btn-action {
+  background-color: #91cc91;
+  border-color: #529252;
+}
+
+.btn-action:hover {
+  background-color: #529252;
+  border-color: #91cc91;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

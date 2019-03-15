@@ -3,7 +3,7 @@ export const addProduct = (quantity, product, order) => ({
   payload: {quantity, product, order}
 });
 
-export const toogleFinish = (productId, orderId) => ({
+export const toggleFinish = (productId, orderId) => ({
   type: 'TOGGLE_FINISH',
   payload: {productId, orderId}
 })
