@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getOrdersByVisibilityFilter } from './redux/selectors';
+import { getOrdersByVisibilityFilter, getPercentageCompleted } from './redux/selectors';
 import FiltrosVisuales from './filtroVisual';
 
 // Este componente renderiza una lista de productos recibidos en props
 function ProductsList(props) {
-  // Saco la sumatoria de todos los productos alistados
-  let alistados = props.products.map(p => {
-    if (p.finished) return p.quantity
-    return (typeof p.alistado === 'undefined') ? 0 : p.alistado;
-  }).reduce((accum, initial) => accum+initial, 0)
   // Saco la sumatoria de todos los productos pedidos
   let necesarios = props.products.map(p => p.quantity).reduce((accum, initial) => accum+initial, 0)
 
@@ -17,7 +12,7 @@ function ProductsList(props) {
   let granTotal = props.products.map(p => p.total).reduce((accum, initial) => accum+initial, 0)
 
   // Calculo entonces los porcentajes
-  let porcentajeCompletado = ((alistados * 100) / necesarios).toFixed(0)
+  let porcentajeCompletado = getPercentageCompleted(props.products)
   let porcentajeFaltante = (100 - porcentajeCompletado).toFixed(0)
   return (
     <div className='container-products'>

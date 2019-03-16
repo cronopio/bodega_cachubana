@@ -83,3 +83,23 @@ export const filterRegionReducer = function filterRegionReducer(state = 'All', a
     }
   }
 }
+
+export const sorterReducer = function sorterReducer(state={by:'Ruta',direction:'DESC'}, action){
+  switch (action.type) {
+    case 'ORDER_DIRECTION': {
+      let by = 'Ruta'
+      let direction = 'DESC'
+      let newState = {}
+      if (!action.payload.by) {
+        newState.by = by;
+      }
+      if (!action.payload.direction) {
+        newState.direction = direction
+      }
+      return Object.assign({}, action.payload, newState);
+    }
+    default: {
+      return state;
+    }
+  }
+}

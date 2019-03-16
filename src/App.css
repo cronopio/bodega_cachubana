@@ -106,6 +106,14 @@
   border-color: #91cc91;
 }
 
+.visibility-filters {
+  min-height: 2.5em;
+}
+
+.view-route {
+  margin-bottom: 1em;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

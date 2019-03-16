@@ -1,11 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import cx from "classnames";
-
-// Sacada de Stackoverflow
-function onlyUnique(value, index, self) { 
-  return self.indexOf(value) === index;
-}
+import React from 'react';
+import { connect } from 'react-redux';
+import cx from 'classnames';
+import { onlyUnique } from './redux/selectors';
 
 const setFilter = filter => ({ type: 'FILTER_REGION', payload: { filter } });
 
@@ -14,14 +10,14 @@ const FiltroRegion = ({ filterRegion, regiones, setFilter }) => {
   // Ingreso el boton de Todas
   regionUniq.unshift('All')
   return (
-    <div className="visibility-filters">Region:
+    <div className='visibility-filters'>Region:
       {regionUniq.map(filterKey => {
         return (
           <span
             key={`visibility-filter-${filterKey}`}
             className={cx(
-              "btn-filtro",
-              filterKey === filterRegion && "btn-filtro-activo"
+              'btn-filtro',
+              filterKey === filterRegion && 'btn-filtro-activo'
             )}
             onClick={() => {
               setFilter(filterKey);

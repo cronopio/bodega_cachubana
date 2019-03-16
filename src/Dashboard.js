@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getOrders, getOrdersByFiltroRegion } from './redux/selectors';
+import { getOrders, getOrdersSortedAndFilteredByRegion } from './redux/selectors';
 import ViewOrder from './viewOrder';
 import FiltroRegion from './filtroRegion';
+import SortButtons from './sortButtons';
 
 class Dashboard extends Component {
   render() {
@@ -11,27 +12,32 @@ class Dashboard extends Component {
     return (
       <div>
         <FiltroRegion regiones={regionList} />
+        <SortButtons />
         {orderList}
       </div>
     )
   }
 }
 
-
 const mapStateToProps = (state, ownProps) => {
-  let { filterRegion } = state;
+  let { filterRegion, sorter } = state;
   if (!filterRegion) {
     filterRegion = 'All'
   }
+  if (!sorter) {
+    sorter = {
+      by:'Ruta',
+      direction: 'DESC'
+    }
+  }
   return {
     filterRegion,
-    orders: getOrdersByFiltroRegion(state, filterRegion)
+    sorter,
+    orders: getOrdersSortedAndFilteredByRegion(state, filterRegion, sorter)
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-
-  }
+  return {}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import logger from 'redux-logger';
 import data from './orders.json';
-import { AddProduct, filtroVisualReducer, toggleFinish, filterRegionReducer } from './myActions'
+import { AddProduct, filtroVisualReducer,
+  toggleFinish, filterRegionReducer, sorterReducer } from './myActions'
 
 const myReduceres = {
   'ADD_PRODUCT': AddProduct,
@@ -25,7 +26,8 @@ const store = createStore(
   combineReducers({
     orders: orderReducer,
     visibilityFilter: filtroVisualReducer,
-    filterRegion: filterRegionReducer
+    filterRegion: filterRegionReducer,
+    sorter: sorterReducer
   }),
   applyMiddleware(logger),
 )

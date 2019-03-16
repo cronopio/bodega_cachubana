@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getOrderById } from './redux/selectors';
+import { getOrderById, getPercentageCompleted } from './redux/selectors';
 import { addProduct, toggleFinish } from "./redux/actions";
 
 // Utilizo este componente para mostrar el boton para marcar completo o no un producto.
@@ -28,17 +28,8 @@ class Alistar extends Component {
   }
 
   render(){
-    // Saco la sumatoria de todos los productos alistados
-    let alistados = this.props.order.products.map(p => {
-      if (p.finished) return p.quantity
-      return (typeof p.alistado === 'undefined') ? 0 : p.alistado;
-    }).reduce((accum, initial) => accum+initial, 0)
-    // Saco la sumatoria de todos los productos pedidos
-    let necesarios = this.props.order.products.map(p => p.quantity).reduce((accum, initial) => accum+initial, 0)
-
-    // Calculo entonces los porcentajes
-    let porcentajeCompletado = ((alistados * 100) / necesarios).toFixed(0)
-    let porcentajeFaltante = (100 - porcentajeCompletado).toFixed(0)
+    let percentajeComplete = getPercentageCompleted(this.props.order.products)
+    let porcentajeFaltante = (100 - percentajeComplete).toFixed(0)
     return (
       <div className="orden">
         <div><h3>{this.props.order.user.name} <span style={{fontWeight: 'bold'}}>[{this.props.order.region_code}]</span></h3></div>
@@ -53,7 +44,7 @@ class Alistar extends Component {
             </thead>
             <tbody>
               <tr>
-                <td style={{backgroundColor: 'green'}}>{porcentajeCompletado}%</td>
+                <td style={{backgroundColor: 'green'}}>{percentajeComplete}%</td>
                 <td style={{backgroundColor: 'red'}}>{porcentajeFaltante}%</td>
               </tr>
             </tbody>

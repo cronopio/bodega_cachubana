@@ -7,6 +7,7 @@ import OrdersList from './orders-list';
 import Bodega from './Bodega';
 import Alistar from './Alistar';
 import Dashboard from './Dashboard';
+import RoutesStatus from './RoutesStatus';
 
 class App extends Component {
   constructor(props){
@@ -35,10 +36,14 @@ class App extends Component {
             <p>Interfaz de Gerente</p>
             <div className="navbar">
               <button className="App-link navbar-btn" onClick={this.selectGui.bind(this)} value="ninguna">Ir al Inicio</button>
+              |
+              <button className="App-link navbar-btn" onClick={this.selectGui.bind(this)} value="rutas">Ver Rutas</button>
             </div>
             <Dashboard />
             <div className="navbar">
               <button className="App-link navbar-btn" onClick={this.selectGui.bind(this)} value="ninguna">Ir al Inicio</button>
+              |
+              <button className="App-link navbar-btn" onClick={this.selectGui.bind(this)} value="rutas">Ver Rutas</button>
             </div>
           </div>
         )
@@ -67,6 +72,20 @@ class App extends Component {
             <Alistar ordenId={this.state.alistandoOrden} />
             <div className="navbar">
               <button className="App-link navbar-btn" onClick={this.selectGui.bind(this)} value="bodega">Ir al Listado</button>
+            </div>
+          </div>
+        )
+        break;
+      case 'rutas':
+        componentToRender = (
+          <div className="App-container">
+            <p>Porcentaje de Ordenes alistadas por ruta.</p>
+            <div className="navbar">
+              <button className="App-link navbar-btn" onClick={this.selectGui.bind(this)} value="dashboard">Ir al Listado</button>
+            </div>
+            <RoutesStatus />
+            <div className="navbar">
+              <button className="App-link navbar-btn" onClick={this.selectGui.bind(this)} value="dashboard">Ir al Listado</button>
             </div>
           </div>
         )

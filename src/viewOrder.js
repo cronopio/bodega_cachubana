@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {getPercentageCompleted} from './redux/selectors';
 
 function ProductList(props) {
   let incompleteFirst = props.products.sort((first, second) => {
@@ -47,15 +48,8 @@ class ViewOrder extends Component {
 
   render(){
     let { order } = this.state;
-    // Saco la sumatoria de todos los productos alistados
-    let alistados = order.products.map(p => {
-      if (p.finished) return p.quantity
-      return (typeof p.alistado === 'undefined') ? 0 : p.alistado;
-    }).reduce((accum, initial) => accum+initial, 0)
-    // Saco la sumatoria de todos los productos pedidos
-    let necesarios = order.products.map(p => p.quantity).reduce((accum, initial) => accum+initial, 0)
-    // Calculo entonces los porcentajes
-    let porcentajeCompletado = ((alistados * 100) / necesarios).toFixed(0)
+
+    let porcentajeCompletado = getPercentageCompleted(order.products)
     let porcentajeFaltante = (100 - porcentajeCompletado).toFixed(0)
 
     return (
