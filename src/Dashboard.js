@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getOrders, getOrdersSortedAndFilteredByRegion } from './redux/selectors';
+import { getOrdersSortedAndFilteredByRegion } from './redux/selectors';
 import ViewOrder from './viewOrder';
 import FiltroRegion from './filtroRegion';
 import SortButtons from './sortButtons';

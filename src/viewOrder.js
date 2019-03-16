@@ -6,10 +6,12 @@ import { getPercentageCompleted } from './redux/selectors';
 // detalles de la orden
 function ProductList(props) {
   let incompleteFirst = props.products.sort((first, second) => {
-    if (first.finished && !second.finished) return 1;
-    if (!first.finished && !second.finished) return 0;
-    if (first.finished && second.finished) return 0;
-    if (!first.finished && second.finished) return -1;
+    let valorRetorno
+    if (first.finished && !second.finished) valorRetorno = 1;
+    if (!first.finished && !second.finished) valorRetorno = 0;
+    if (first.finished && second.finished) valorRetorno = 0;
+    if (!first.finished && second.finished) valorRetorno = -1;
+    return valorRetorno
   })
   return (
     <table>
