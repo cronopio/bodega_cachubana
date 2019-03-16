@@ -36,29 +36,9 @@ function ProductsList(props) {
   )
 }
 
-// Este componente renderiza un solo producto y su informacion.
-// Se deja de usar para no mostrar esta info en el listado.
-function Product(props) {
-  return(
-    <tr>
-      <td style={{textAlign:'left'}}>{props.product.name}</td>
-      <td style={{textAlign:'center'}}>${props.product.price}</td>
-      <td style={{textAlign:'center'}}>{props.product.quantity}</td>
-      <td style={{textAlign:'center'}}>${props.product.total}</td>
-    </tr>
-  )
-}
-
 // Este componente se usa para mostrar el listado de ordenes a procesar
 // Esta conectado a un store de Redux y puede cambiar de GUI
 class OrdersListBodega extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    }
-  }
   setAlistarGui(event){
     this.props.updateState('alistandoOrden', event.target.value)
     this.props.updateState('gui', 'alistar')

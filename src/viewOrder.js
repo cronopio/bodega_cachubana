@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import {getPercentageCompleted} from './redux/selectors';
+import { getPercentageCompleted } from './redux/selectors';
 
+// Utilizo este componente para producir el listado de productos
+// que sera mostrada en el componente ViewOrder que muestra los
+// detalles de la orden
 function ProductList(props) {
   let incompleteFirst = props.products.sort((first, second) => {
     if (first.finished && !second.finished) return 1;
@@ -38,11 +41,13 @@ function ProductList(props) {
   )
 }
 
+
+// Utilizo este componente para mostrar el detalle de una orden.
 class ViewOrder extends Component {
   constructor(props){
     super(props);
     this.state = {
-      order: props.order,
+      order: props.order
     }
   }
 

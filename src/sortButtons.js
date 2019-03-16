@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
+// Action a emitir en caso de presionado un boton
+// de ordenacion enviando los parametros de ordenacion.
 const setSorter = sorter => ({
   type: 'ORDER_DIRECTION',
   payload: {
@@ -10,6 +12,10 @@ const setSorter = sorter => ({
   }
 });
 
+// Utilizo este componente para crear los botones
+// solicitados como criterios de ordenamiento
+// Al hacer click una vez los ordena por el criterio
+// Los siguientes clicks solo reversan este orden.
 const SortButtons = ({sorter, setSorter}) => {
   return (
     <div className='sort-buttons'>

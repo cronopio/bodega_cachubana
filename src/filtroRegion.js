@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import { onlyUnique } from './redux/selectors';
 
+// Action a emitir en caso de escogida una region como filtro
 const setFilter = filter => ({ type: 'FILTER_REGION', payload: { filter } });
 
+// Utilizo este componente para generar los botones que 
+// filtraran por region, usando las regiones que saco del estado
+// Asi que automaticamente se va llenando a medida que aparezcan regiones
 const FiltroRegion = ({ filterRegion, regiones, setFilter }) => {
   let regionUniq = regiones.filter(onlyUnique)
   // Ingreso el boton de Todas

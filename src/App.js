@@ -9,6 +9,8 @@ import Alistar from './Alistar';
 import Dashboard from './Dashboard';
 import RoutesStatus from './RoutesStatus';
 
+// Este componente lo utlizo como
+// una especie de quick and lazy router.
 class App extends Component {
   constructor(props){
     super(props);
@@ -30,6 +32,7 @@ class App extends Component {
   render() {
     var componentToRender
     switch(this.state.gui) {
+      // En caso de ser gerente se cargara el dashboard
       case 'dashboard':
         componentToRender = (
           <div className="App-container">
@@ -48,6 +51,7 @@ class App extends Component {
           </div>
         )
         break;
+      // En caso de ser un operario se cargara la interfaz de bodega
       case 'bodega':
         componentToRender = (
           <div className="App-container">
@@ -62,6 +66,7 @@ class App extends Component {
           </div>
         )
         break;
+      // Desde la interfaz de bodega puedo ir a la interfaz de Alistar ordenes
       case 'alistar':
         componentToRender = (
           <div className="App-container">
@@ -76,6 +81,7 @@ class App extends Component {
           </div>
         )
         break;
+      // Desde el dashboard puedo ir a la interfaz de el estado de alistado de rutas
       case 'rutas':
         componentToRender = (
           <div className="App-container">
@@ -90,6 +96,7 @@ class App extends Component {
           </div>
         )
         break;
+      // Interfaz de Inicio.
       default:
         componentToRender = (
           <div className="App-container">

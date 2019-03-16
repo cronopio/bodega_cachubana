@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { getRoutesFromOrders, getPercentageCompleted,
     getProductCountByOrder } from './redux/selectors';
 
+// Utilizo este componente para mostrar el listado de ordenes
+// de aucerdo a una ruta en especifica.
 function ViewRoute(props) {
+  // Muestro el istado de ordenes con sus respectivos porcentajes
   let ordersList =  props.route.orders.map(order => {
     let percentajeComplete = getPercentageCompleted(order.products)
     let porcentajeFaltante = (100 - percentajeComplete).toFixed(0);
@@ -15,14 +18,17 @@ function ViewRoute(props) {
       </tr>
     )
   })
+  // Saco la sumatoria de todos los productos alistados en todas las ordenes
   let alistadosOrders = props.route.orders.map(order => 
     getProductCountByOrder(order.products)
   ).reduce((accum, initial) => accum+Number(initial.alistados), 0)
 
+  // Saco la sumatoria de todos los productos necesarios en todas las ordenes
   let necesariosOrders = props.route.orders.map(order => 
     getProductCountByOrder(order.products)
   ).reduce((accum, initial) => accum+Number(initial.necesarios), 0)
 
+  // Calculo a partir de lo anterior el porcentaje entonces de alistada de la ruta
   let percentajeCompleteRoute = ((alistadosOrders * 100) / necesariosOrders).toFixed(0)
   let porcentajeFaltanteRoute = (100 - percentajeCompleteRoute).toFixed(0);
   return (
@@ -49,6 +55,10 @@ function ViewRoute(props) {
   )
 }
 
+
+// Utilizo este componente para mostrar el listado de rutas
+// Y el detalle de cada una mostrando los porcentajes de completadas
+// de cada orden y tambien de la ruta completa.
 class RoutesStatus extends Component {
   render(){
     let { routes } = this.props;
